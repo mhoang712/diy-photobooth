@@ -1,0 +1,26 @@
+# Environment variables & API secrets (NEVER commit .env)
+.env
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# Captured raw shots & processed photobooth strips (keep folders)
+static/captures/*
+!static/captures/.gitkeep
+processed/*
+!processed/.gitkeep
+
+# Local test files
+test.jpg
+temp_capture.jpg
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

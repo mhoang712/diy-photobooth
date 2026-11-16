@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photobooth</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Live View Background (Fetched from digiCamControl Web Server) -->
+    <img id="live-view" src="" alt="Live View" style="display: none;">
+
+    <div id="flash"></div>
+
+    <!-- State 1: IDLE -->
+    <div id="state-idle" class="state active">
+        <h1 style="font-size: 4rem; margin-bottom: 2rem;">TAP TO START</h1>
+        <button class="btn btn-start" onclick="transitionTo('select-frame');">Start</button>
+    </div>
+
+    <!-- State 1.5: SELECT FRAME -->
+    <div id="state-select-frame" class="state">
+        <h1 style="font-size: 3rem; margin-bottom: 2rem;">Choose Your Layout</h1>
+        <div class="frame-grid">
+            <div class="frame-option" onclick="selectFrame('frame_2cut.png')">
+                <img src="/static/assets/frame_2cut.png" alt="2 Cut Frame">
+                <p>2 Photos</p>
+            </div>
+            <div class="frame-option" onclick="selectFrame('frame_3cut.png')">
+                <img src="/static/assets/frame_3cut.png" alt="3 Cut Frame">
+                <p>3 Photos</p>
+            </div>
+            <div class="frame-option" onclick="selectFrame('frame_4cut.png')">
+                <img src="/static/assets/frame_4cut.png" alt="4 Cut Frame">
+                <p>4 Photos</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- State 2: INSTRUCTIONS -->
+    <div id="state-instructions" class="state">
+        <div class="card">
+            <h2>How it works</h2>
+            <p>1. Strike a pose</p>
+            <p>2. Wait for the flash</p>
+            <p>3. Scan the QR code to get your photo!</p>
+            <button onclick="startCaptureLoop()">Start</button>
+        </div>
+    </div>
+
+    <!-- State 3: CAPTURE LOOP -->
+    <div id="state-capture" class="state">
+        <h1 id="countdown">10</h1>
+        <p id="shot-counter">Shot 1 of 4</p>
+        <div id="spinner" class="spinner" style="display: none;"></div>
+    </div>
+
+    <!-- State 4: PROCESSING -->
+    <div id="state-processing" class="state">
+        <div class="card">
+            <h2>Processing your photos...</h2>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- State 5: RESULT -->
+    <div id="state-result" class="state">
+        <div class="result-container">
+            <div class="photo-container">
+                <img id="final-image" src="" alt="Your Photo">
+            </div>
+            <div class="qr-container">
+                <h2>Scan to Download</h2>
+                <img id="qr-code" src="" alt="QR Code">
+                <button onclick="transitionTo('idle')">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

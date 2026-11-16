@@ -1,0 +1,247 @@
+:root {
+    --bg-color: #0f172a;
+    --text-color: #f8fafc;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --card-bg: rgba(30, 41, 59, 0.6);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#live-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+    z-index: -1;
+    /* Mirror the image so it acts like a real mirror for guests! */
+    transform: scaleX(-1); 
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    overflow: hidden; /* Strictly unscrollable */
+    user-select: none; /* Unselectable text */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.state {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.state.active {
+    display: flex;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+h1 {
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 4rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card p {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #cbd5e1;
+}
+
+button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 1.5rem 4rem;
+    font-size: 2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 2rem;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+#state-capture {
+    justify-content: flex-start;
+    padding-top: 8vh;
+}
+
+#countdown {
+    font-size: 8rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+#shot-counter {
+    font-size: 2rem;
+    color: #e2e8f0;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+.spinner {
+    width: 100px;
+    height: 100px;
+    border: 10px solid rgba(255, 255, 255, 0.1);
+    border-top: 10px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.flash-anim {
+    animation: flashAnimation 1s ease-out;
+}
+
+@keyframes flashAnimation {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.result-container {
+    display: flex;
+    width: 90%;
+    height: 90%;
+    gap: 2rem;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.photo-container {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.photo-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.qr-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.qr-container h2 {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.qr-container img {
+    width: 80%;
+    max-width: 400px;
+    aspect-ratio: 1;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.frame-grid {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: stretch;
+    margin-top: 2rem;
+}
+
+.frame-option {
+    background: rgba(30, 41, 59, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.frame-option:hover {
+    transform: scale(1.05);
+    border-color: var(--primary);
+    background: rgba(59, 130, 246, 0.2);
+}
+
+.frame-option img {
+    height: 300px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    background: #ffffff; /* White background so transparent frames are visible */
+    border-radius: 10px;
+}
+
+.frame-option p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
